@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life on Land</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        /* Basic Reset and Body Style */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .background {
+            width: 100%;
+            height: 100vh;
+            background-image: url(Backrground.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex; /* Use flexbox for layout */
+            justify-content: space-between; /* Space between logo and links */
+            align-items: center; /* Center items vertically */
+            padding: 10px 20px; /* Add padding */
+            background-color: #8BA673; /* Background color for navbar */
+            color: #fff; /* Text color */
+        }
+
+        .navbar__logo {
+            display: flex;
+            align-items: center; /* Center logo and name vertically */
+        }
+
+        .navbar__logo img {
+            width: 40px; /* Adjust the size of your logo */
+            margin-right: 10px; /* Space between logo and name */
+        }
+
+        .navbar__links {
+            list-style: none; /* Remove bullet points */
+            display: flex; /* Display links in a row */
+            gap: 20px; /* Space between links */
+            list-style: none; /* Remove bullet points */
+            display: flex; /* Display links in a row */
+            gap: 60px; /* Space between links */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+            justify-content: center; /* Center the links horizontally */
+            flex-grow: 1; /* Allow links to take up available space */
+            font-size: 18px;
+        }
+
+        .navbar__links a {
+            color: #fff; /* Link color */
+            text-decoration: none; /* Remove underline */
+        }
+
+        .navbar__links a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+
+        /* Map Styles */
+        #map {
+            height: 400px; /* Set height of the map */
+            margin-top: 20px; /* Space above the map */
+        }
+
+        .map-container {
+        margin: 100px 0 0 100px;
+		width: 100%;	
+		height: 450px;
+		display: flex;
+		justify-content: center;
+		gap: 10px;   
+        }
+
+       
+
+        #map {
+        height: 350px; /* Set height of the map */
+        width: 100%; /* Make the map take full width of its container */
+        max-width: 600px; /* Optional: set a maximum width */
+        margin-left: 700px; /* Space from the left */
+        margin-top: -570px;
+        }
+
+        .map-container h1 {
+        display: absolute;/* Center the heading */
+        top: 50px; /* Space below the heading */
+        font-size: 24px; /* Adjust font size */
+        color: #333; /* Change text color */
+        }
+
+        .search-bar {
+            display: flex; /* Use flexbox for layout */
+            align-items: center; /* Center items vertically */
+        }
+
+        .search-bar input {
+            padding: 8px 40px 8px 10px; /* Padding for input with extra space for the icon */
+            border: none; /* Remove border */
+            border-radius: 4px; /* Rounded corners */
+            margin-right: 10px; /* Space between input and button */
+            outline: none; /* Remove outline */
+        }
+
+        .search-bar .icon {
+            position: absolute; /* Position the icon absolutely */
+            left: 1285px; /* Position it inside the input */
+            top: 4%; /* Center vertically */
+            transform: translateY(-50%); /* Adjust for vertical centering */
+            color: #8BA673; /* Icon color */
+        }
+        
+        .main__container {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		align-items: center;
+		justify-self: center;
+		margin: 0 auto;
+		height: 90vh;
+		
+		z-index: 1;
+		width: 100%;
+		max-width: 1300;
+		padding: 0 50px;
+	    }
+
+	    .main__content p1 {
+		font-size: 2.5rem;
+		background-color: #ff8177;
+		background-image: linear-gradient(to top, #501515 0%, #31231c 100%);
+		background-size: 100%;
+		-webkit-background-clip: text;
+		-moz-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		-moz-text-fill-color: transparent;
+	    }
+
+	    .main__content h2 {
+		font-size: 4rem;
+        position: rel;
+		background-color: #ffffff;
+		background-image: linear-gradient(to top, #c0bdea 0%, #1201ff 100%);
+		background-size: 100%;
+		-webkit-background-clip: text;
+		-moz-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		-moz-text-fill-color: transparent;
+	    }
+
+	    .main__content p {
+		margin-top: 1rem;
+		font-size: 2rem;
+		font-weight: 300;
+		font-family: Arial;
+		color: #fcfcfc;
+	    }
+
+        .main__content p2 {
+		margin-top: 1rem;
+		font-size: 1rem;
+		font-weight: 200;
+		font-family: Arial;
+		color: #fff;
+	    }
+
+        .main__content p3 {
+		margin-top: 1rem;
+		font-size: 1rem;
+		font-weight: 200;
+		font-family: Arial;
+		color: #fff;
+	    }
+      
+
+        
+    </style>
+</head>
+<body>
+
+    <div class="background">
+    <!-- Navbar Section -->
+    <nav class="navbar">
+        
+        <div class="navbar__logo">
+            <img src="1.png" alt="image"> 
+            <span style="font-size: 30px; color: #014421;"><b>Techtok</b></span> 
+        </div>
+        <ul class="navbar__links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="search-bar">
+            <input type="text"  aria-label="Search">
+            <span class="icon">&#128269;</span>
+        </div>
+    </nav>
+
+    <div class="main__container">
+        <div class="main__content">
+            <p1><b>EXPLORE</b></p1>
+            <h2>THE WORLD</h2>
+            <p>While trying to save it.</p>
+            <p2>Using our live satellite map you can see places<br>in crisis of deforestation.</p2><br><br>
+            <p3>By just one CLICK you can save millions of animal lives, including plant life. </p3>
+        </div>
+    </div>
+        
+    
+
+    <!-- Leaflet Map Section -->
+    <div class="map-container">
+    <div id="map">
+    </div> 
+    </div>
+    </div>
+    </div>
+    
+   
+    
+    
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Initialize the map
+        var map = L.map('map').setView([51.505, -0.09], 13); // Set initial view (latitude, longitude, zoom level)
+
+        // Add OpenStreetMap tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        // Add a marker to the map
+        var marker = L.marker([51.5, -0.09]).addTo(map);
+        marker.bindPopup('<b>Hello!</b><br>Start here.').openPopup();
+
+        
+    </script>
+</body>
+</html>
