@@ -1,6 +1,186 @@
-body {
-background-color: lightblue;
-font-family: verdana;
-background-size: cover;
-background-position: center;
+  /* Basic Reset and Body Style */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .background {
+            width: 100%;
+            height: 100vh;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex; /* Use flexbox for layout */
+            justify-content: space-between; /* Space between logo and links */
+            width: 100%;
+            align-items: center; /* Center items vertically */
+            padding: 10px 20px; /* Add padding */
+            background-color: #8BA673; /* Background color for navbar */
+            color: #fff; /* Text color */
+            height: 80px;
+        }
+
+        .navbar__logo {
+            display: flex;
+            align-items: center; /* Center logo and name vertically */
+        }
+
+        .navbar__logo img {
+            width: 50px; /* Adjust the size of your logo */
+            margin-right: 5px; /* Space between logo and name */
+        }
+
+        .navbar__links {
+            list-style: none; /* Remove bullet points */
+            display: flex; /* Display links in a row */
+            gap: 20px; /* Space between links */
+            list-style: none; /* Remove bullet points */
+            display: flex; /* Display links in a row */
+            position: absolute;
+            left: 550px;
+            top: 25px;
+            gap: 60px; /* Space between links */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+            justify-content: center; /* Center the links horizontally */
+            flex-grow: 1; /* Allow links to take up available space */
+            font-size: 18px;
+        }
+.navbar__links li {
+    margin: 0 15px; /* Space between links */
+    position: relative; /* Required for absolute positioning of the underline */
 }
+
+.navbar__links a {
+    text-decoration: none; /* Remove default underline */
+    color: #fff; /* Link color */
+    position: relative; /* Required for the ::after pseudo-element */
+}
+
+.navbar__links a::after {
+    content: ""; /* No text needed for the underline */
+    display: block;
+    width: 0; /* Start with no width */
+    height: 3px; /* Height of the underline */
+    background-color: #fff; /* Color of the underline */
+    position: absolute; /* Position it absolutely */
+    bottom: -5px; /* Position it slightly below the text */
+    left: 0; /* Start from the left of the text */
+    transition: width 0.3s ease; /* Smooth transition for the underline effect */
+}
+
+.navbar__links a:hover::after {
+    width: 100%; /* Expand to full width on hover */
+}
+
+.search-container {
+    display: flex; /* Use flexbox for the search form */
+    justify-content: right; /* Align search to the right */
+    position: absolute;
+    left: 1200px;
+    bottom: 20px;
+}
+
+.btn-outline-success {
+color: white;
+border: 2px solid #fff;
+}
+
+ .main__container {
+	display: grid;
+		grid-template-columns: 1fr 1fr;
+		align-items: center;
+		justify-self: center;
+		margin: 0 auto;
+		height: 90vh;
+
+		z-index: 1;
+		width: 100%;
+		max-width: 1300;
+		padding: 0 50px;
+ }
+
+.main__content p1 {
+		font-size: 2.5rem;
+		background-color: #ff8177;
+		background-image: linear-gradient(to top, #501515 0%, #31231c 100%);
+		background-size: 100%;
+		-webkit-background-clip: text;
+		-moz-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		-moz-text-fill-color: transparent;
+	    }
+
+    	    .main__content h2 {
+		font-size: 4rem;
+        position: rel;
+		background-color: #ffffff;
+		background-image: linear-gradient(to top, #c0bdea 0%, #1201ff 100%);
+		background-size: 100%;
+		-webkit-background-clip: text;
+		-moz-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		-moz-text-fill-color: transparent;
+	    }
+
+	    .main__content p {
+		margin-top: 1rem;
+		font-size: 2rem;
+		font-weight: 300;
+		font-family: Arial;
+		color: #fcfcfc;
+        background-image: linear-gradient(to top, #501515 0%, #31231c 100%);
+		background-size: 100%;
+		-webkit-background-clip: text;
+		-moz-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		-moz-text-fill-color: transparent;
+	    }
+
+        .main__content p2 {
+		margin-top: 1rem;
+		font-size: 1rem;
+		font-weight: 200;
+		font-family: Arial;
+		color: #fff;
+		background-image: linear-gradient(to top, #501515 0%, #31231c 100%);
+		background-size: 100%;
+		-webkit-background-clip: text;
+		-moz-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		-moz-text-fill-color: transparent;
+	    }
+
+        .main__content p3 {
+		margin-top: 1rem;
+		font-size: 1rem;
+		font-weight: 200;
+		font-family: Arial;
+		color: #fff;
+		background-image: linear-gradient(to top, #501515 0%, #31231c 100%);
+		background-size: 100%;
+		-webkit-background-clip: text;
+		-moz-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		-moz-text-fill-color: transparent;
+	    }
+
+.map__text p4 {
+        position: absolute;
+        top: 150px;
+        left: 980px;
+		font-size: 2.5rem;
+		background-color: #ff8177;
+		background-image: linear-gradient(to top, #501515 0%, #31231c 100%);
+		background-size: 100%;
+		-webkit-background-clip: text;
+		-moz-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		-moz-text-fill-color: transparent;
+	    }
+

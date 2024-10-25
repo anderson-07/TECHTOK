@@ -4,14 +4,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+   <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <title>Life on Land</title>
+    <style>
+        #map {
+            width: 700px;
+            height: 300px;
+            position:absolute;
+            right: 50px;
+            bottom: -450px;
+            border: 5px solid brown;
+            background: rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 255, 0, 20);
+            }
+             .legend div {
+            margin-bottom: 5px;
+            }
+    </style>
 </head>
 <body>
-<div class="navbar">
-</div>
-<h1>HELLO NIGGIES</h1>
-<img src="{% static 'WEB BACKGROUND/Background.jpg' %}" alt="Hi!">
-<div></div>
+
+    <div class="navbar">
+        <div class="background">
+            <div class="navbar__logo">
+                <img src="{% static 'img/logo.png' %}">
+                <span style="font-size: 30px; color: #014421;"><b>Techtok</b></span>
+            </div>
+            <ul class="navbar__links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="search-container" >
+                <form class="d-flex"  role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+
+            <div id="map"></div>
+            <div class="map__text">
+                <p4><b>Live Map Satellite</b></p4>
+            </div>
+             <div class="main__container">
+                      <div class="main__content">
+                            <p1><b>EXPLORE</b></p1>
+                            <h2>THE WORLD</h2>
+                            <p>While trying to save it.</p>
+                            <p2>Using our live satellite map you can see places<br>in crisis of deforestation.</p2><br><br>
+                            <p3>By just one CLICK you can save millions of animal lives, including plant life.</p3>
+                     </div>
+             </div>
+        </div>
+    </div>
+
+
+    <img src="{% static 'img/Background.jpg' %}" alt="image">
+
+
 </body>
+    <script>
+        /*  Boundaries of the Philippines */
+        var philippinesBounds = L.latLngBounds([[4.5, 116.0], [21.5, 127.0]]);
+
+        /* Initialize Map */
+        var map = L.map('map').setView([12.8797, 121.7740], 6);
+
+
+        /* Base Layer */
+        var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        })
+        osm.addTo(map);
+
+        /* Satellite Imagery */
+        var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+	    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+        });
+        Esri_WorldImagery.addTo(map);
+
+        /* Drones */
+        var Esri_WorldPhysical = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}', {
+	    attribution: 'Tiles &copy; Esri &mdash; Source: US National Park Service',
+	    maxZoom: 8
+        });
+        Esri_WorldPhysical.addTo(map);
+
+
+        /* Add a marker to the map */
+        var marker = L.marker([14.7280, 120.9618]).addTo(map);
+        marker.bindPopup('<b>Hello!</b><br>Start here.').openPopup();
+
+        /* Quezon City */
+        var bounds = L.latLngBounds([[14.5, 120.9,], [14.8, 121.2]]);
+        bounds.extend([[8.5], [125.83]]);
+
+        var deforestationLayer = L.tileLayer.wms("https://sedac.ciesin.columbia.edu/geoserver/wms", {
+        layers: 'gpw-v3:gpw-v3-population-density_2000',
+        format: 'image/png',
+        transparent: true,
+        opacity: 0.6,
+        attribution: "SEDAC",
+        bounds: bounds
+        });
+
+        /* Mindanao */
+        var illegal_loggingLayer = L.tileLayer.wms("https://sedac.ciesin.columbia.edu/geoserver/wms", {
+        layers: "anthromes:anthromes-anthropogenic-biomes-world-v2-2000",
+        format: "image/png",
+        transparent: true,
+        opacity: .6,
+        attribution: "SEDAC",
+        bounds: [[7.17, 126.33], [9.740696, 118.730072]]
+        }).addTo(map);
+
+        /* Apayao - San Jose De Buan */
+        var wildpopulationLayer = L.tileLayer.wms("https://sedac.ciesin.columbia.edu/geoserver/wms", {
+        layers: "wildareas-v3:wildareas-v3-1993-human-footprint",
+        format: "image/png",
+        transparent: true,
+        opacity: .6,
+        attribution: "SEDAC",
+        bounds: [[18.291779, 121.434189], [12.000, 125.000]]
+        }).addTo(map);
+
+        /* Control layer */
+        var baseMaps = {
+        "Open Street Map": osm,
+        "Satellite": Esri_WorldImagery,
+        "Drone": Esri_WorldPhysical,
+        };
+
+        var overlayMaps = {
+        "Deforestation": deforestationLayer,
+        "Ileggal Logging": illegal_loggingLayer,
+        "Wild Life Populations": wildpopulationLayer,
+        };
+
+        L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+        L.Control.geocoder().addTo(map);
+
+        var legend = L.control({ position: 'topleft' });
+
+    legend.onAdd = function (map) {
+     var div = L.DomUtil.create('div', 'Legend');
+    div.innerHTML += '<div style="background: red; width: 20px; height: 20px; display: inline-block;"></div> Critical<br>';
+    div.innerHTML += '<div style="background: blue; width: 20px; height: 20px; display: inline-block;"></div> Minimal<br>';
+    return div;
+    };
+
+     L.marker([13.41, 122.56], { color: 'red' }).addTo(map).bindPopup('This is a red marker.');
+
+
+     L.marker([13.45, 122.60], { color: 'blue' }).addTo(map).bindPopup('This is a blue marker.');
+
+     /* Legend */
+     legend.addTo(map);
+
+    </script>
 </html>
