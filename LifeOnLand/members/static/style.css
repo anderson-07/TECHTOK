@@ -6,8 +6,8 @@
         }
 
         .background {
-            width: 100%;
-            height: 100vh;
+            width: 1920px;
+            height: 1080px;
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
@@ -23,6 +23,7 @@
             background-color: #8BA673; /* Background color for navbar */
             color: #fff; /* Text color */
             height: 80px;
+            margin: 0 auto;
         }
 
         .navbar__logo {
@@ -52,14 +53,16 @@
             font-size: 18px;
         }
 .navbar__links li {
-    margin: 0 15px; /* Space between links */
+    margin: 0 auto; /* Space between links */
     position: relative; /* Required for absolute positioning of the underline */
+    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 .navbar__links a {
     text-decoration: none; /* Remove default underline */
     color: #fff; /* Link color */
-    position: relative; /* Required for the ::after pseudo-element */
 }
 
 .navbar__links a::after {
@@ -93,20 +96,20 @@ border: 2px solid #fff;
 
  .main__container {
 	display: grid;
-		grid-template-columns: 1fr 1fr;
-		align-items: center;
-		justify-self: center;
-		margin: 0 auto;
-		height: 90vh;
+	grid-template-columns: 1fr 1fr;
+	align-items: center;
+	justify-self: center;
+	margin: 0 auto;
+	height: 90vh;
 
-		z-index: 1;
-		width: 100%;
-		max-width: 1300;
-		padding: 0 50px;
+	z-index: 1;
+	width: 100%;
+	max-width: 1300;
+	padding: 0 50px;
  }
 
 .main__content p1 {
-		font-size: 2.5rem;
+		font-size: 3.5rem;
 		background-color: #ff8177;
 		background-image: linear-gradient(to top, #501515 0%, #31231c 100%);
 		background-size: 100%;
@@ -114,18 +117,15 @@ border: 2px solid #fff;
 		-moz-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		-moz-text-fill-color: transparent;
+		font-weight: bold;
 	    }
 
-    	    .main__content h2 {
+    	.main__content h2 {
 		font-size: 4rem;
         position: rel;
-		background-color: #ffffff;
-		background-image: linear-gradient(to top, #c0bdea 0%, #1201ff 100%);
-		background-size: 100%;
-		-webkit-background-clip: text;
-		-moz-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		-moz-text-fill-color: transparent;
+		color: white;
+		text-shadow: 3px 3px gray;
+		font-weight: bold;
 	    }
 
 	    .main__content p {
@@ -133,13 +133,8 @@ border: 2px solid #fff;
 		font-size: 2rem;
 		font-weight: 300;
 		font-family: Arial;
-		color: #fcfcfc;
-        background-image: linear-gradient(to top, #501515 0%, #31231c 100%);
-		background-size: 100%;
-		-webkit-background-clip: text;
-		-moz-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		-moz-text-fill-color: transparent;
+		color: white;
+		text-shadow: 3px 3px gray;
 	    }
 
         .main__content p2 {
@@ -147,13 +142,8 @@ border: 2px solid #fff;
 		font-size: 1rem;
 		font-weight: 200;
 		font-family: Arial;
-		color: #fff;
-		background-image: linear-gradient(to top, #501515 0%, #31231c 100%);
-		background-size: 100%;
-		-webkit-background-clip: text;
-		-moz-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		-moz-text-fill-color: transparent;
+		color: white;
+		text-shadow: 1px 1px gray;
 	    }
 
         .main__content p3 {
@@ -161,13 +151,8 @@ border: 2px solid #fff;
 		font-size: 1rem;
 		font-weight: 200;
 		font-family: Arial;
-		color: #fff;
-		background-image: linear-gradient(to top, #501515 0%, #31231c 100%);
-		background-size: 100%;
-		-webkit-background-clip: text;
-		-moz-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		-moz-text-fill-color: transparent;
+		color: white;
+		text-shadow: 1px 1px gray;
 	    }
 
 .map__text p4 {
@@ -183,4 +168,3 @@ border: 2px solid #fff;
 		-webkit-text-fill-color: transparent;
 		-moz-text-fill-color: transparent;
 	    }
-
